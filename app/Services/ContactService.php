@@ -32,7 +32,7 @@ class ContactService
         $validated = $this->validator->validate($data, [
             'name' => 'required|max:60',
             'email' => ['required', 'email', 'max:200', Rule::unique('contacts', 'email')->whereNull('deleted_at')],
-            'contact' => 'required|digits:9'
+            'contact' => ['required', 'digits:9', Rule::unique('contacts', 'contact')->whereNull('deleted_at')]
         ], [
             'name' => 'The name field is required.',
             'name.max' => 'The name must not exceed 60 characters.',
@@ -40,7 +40,8 @@ class ContactService
             'email.max' => 'The email must not exceed 200 characters.',
             'email.unique' => 'The given email is already in use.',
             'contact' => 'The contact field is required.',
-            'contact.digits' => 'The contact field must be 9 digits.'
+            'contact.digits' => 'The contact field must be 9 digits.',
+            'contact.unique' => 'The given contact is already in use.',
         ]);
 
         $contact = $this->contact->create([
@@ -61,7 +62,7 @@ class ContactService
             'id' => 'required|int',
             'name' => 'required|max:60',
             'email' => ['required', 'email', 'max:200', Rule::unique('contacts', 'email')->whereNot('id', $data['id'])],
-            'contact' => 'required|digits:9'
+            'contact' => ['required', 'digits:9', Rule::unique('contacts', 'contact')->whereNot('id', $data['id'])]
         ], [
             'name' => 'The name field is required.',
             'name.max' => 'The name must not exceed 60 characters.',
@@ -69,7 +70,8 @@ class ContactService
             'email.max' => 'The email must not exceed 200 characters.',
             'email.unique' => 'The given email is already in use.',
             'contact' => 'The contact field is required.',
-            'contact.digits' => 'The contact field must be 9 digits.'
+            'contact.digits' => 'The contact field must be 9 digits.',
+            'contact.unique' => 'The given contact is already in use.',
         ]);
 
         $contact = $this->contact->findOrFail($validated['id']);
