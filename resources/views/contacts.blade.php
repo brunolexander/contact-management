@@ -56,8 +56,10 @@
             </div>
         </div>
 
-        <div class="card-body contact-list">
-            <ul class="list-group">
+        <div class="card-body">
+            <ul class="list-group contact-list-filtered"></ul>
+
+            <ul class="list-group contact-list d-none">
                 @forelse ($contacts as $contact)
                     @include('components.contact', $contact)
                 @empty
@@ -67,6 +69,7 @@
                 @endforelse
             </ul>
         </div>
+
     </div>
 </div>
 

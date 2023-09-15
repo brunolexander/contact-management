@@ -7,7 +7,7 @@ $(function() {
     });
 
     $('.form-input-contact').on('input', function() {
-        $(this).val(this.value.replace(/[^0-9]/, '').substring(0, 8))
+        $(this).val(this.value.replace(/[^0-9]/, '').substring(0, 9))
     });
 
     $('#newContactModal').on('show.bs.modal', function() {
@@ -17,8 +17,28 @@ $(function() {
 
     const newContactForm = $('#newContactForm').on('submit', (e) => e.preventDefault())
     const editContactForm = $('#editContactForm').on('submit', (e) => e.preventDefault())
-    const contactList = $('.contact-list .list-group')
+    const contactList = $('.list-group.contact-list')
+    const contactListFiltered = $('.list-group.contact-list-filtered')
     
+    // Filter contacts
+    const filterContactInput = $('.search-contact').on('input', function() {
+        const term = this.value.trim()
+
+        contactListFiltered.empty()
+        $('.list-group-item[data-id]', contactList).filter(function (_, element) {
+            const data = $(element).data()
+            return (term.length === 0 || data.name.includes(term) || data.email.includes(term) || String(data.contact).includes(term))
+        }).each((_, element) => contactListFiltered.append($(element).clone()))
+
+        if ($('.list-group-item', contactListFiltered).length == 0) {
+            contactListFiltered.append(`<li class="list-group-item text-center">
+                No results found.
+            </li>`);
+        }
+    }).trigger('input');
+
+    const filterContacts = () => filterContactInput.trigger('input')
+
     // Add contact
     $('.btn-save').on('click', function() {
         const btnSave = $(this).hide()
@@ -41,6 +61,8 @@ $(function() {
                 newContactForm.trigger('reset')
                 contactList.append(data.html)
                 $('.has-no-contacts', contactList).remove()
+               
+                filterContacts()
             },
             error: function(jqXHR) {
                 const response = jqXHR.responseJSON;
@@ -92,6 +114,8 @@ $(function() {
                 alertDanger.hide()
                 alertSuccess.slideDown('fast')
                 $('.list-group-item', contactList).filter((_, element) => $(element).data('id') == contactId).replaceWith(data.html)
+                
+                filterContacts()
             },
             error: function(jqXHR) {
                 const response = jqXHR.responseJSON;
@@ -145,6 +169,8 @@ $(function() {
                         There are no contacts registered.
                     </li>`);
                 }
+
+                filterContacts()
             },
             error: function(jqXHR) {
                 const response = jqXHR.responseJSON;
