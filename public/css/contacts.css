@@ -12,3 +12,11 @@
 .btn-save, .btn-save-loading {
     width: 60px;
 }
+
+.btn-delete, .btn-delete-loading {
+    width: 80px;
+}
+
+.btn-update, .btn-update-loading {
+    width: 60px;
+}

@@ -24,4 +24,14 @@ class ContactController extends Controller
     {
         return $this->contact_service->createContact($request->input());
     }
+
+    public function save(Request $request)
+    {
+        return $this->contact_service->updateContact($request->input());
+    }
+
+    public function destroy(Request $request)
+    {
+        return $this->contact_service->deleteContact($request->input());
+    }
 }

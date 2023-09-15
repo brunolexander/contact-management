@@ -22,4 +22,6 @@ Route::get('/logout', [LoginController::class, 'logout']);
 
 Route::middleware('auth')->group(function() {
     Route::post('/contacts/create', [ContactController::class, 'create']);
+    Route::post('/contacts/destroy', [ContactController::class, 'destroy']);
+    Route::post('/contacts/save', [ContactController::class, 'save']);
 });
