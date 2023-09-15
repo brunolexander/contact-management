@@ -14,5 +14,7 @@ Laravel web application developed to manage contacts.
 
 ## Built with
 * Laravel 10
-* Bootstrap 5.3
 * MariaDB 10.6
+* JQuery 3.7
+* Bootstrap 5.3
+* FontAwesome 6
