@@ -25,7 +25,7 @@ class LoginController extends Controller
         {
             return redirect('/');
         }
-        
+
         return $this->view->make('login');
     }
 

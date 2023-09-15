@@ -57,31 +57,7 @@
         <div class="card-body contact-list">
             <ul class="list-group">
                 @forelse ($contacts as $contact)
-                    <li class="list-group-item">
-                        <div class="row align-items-center">
-                            <div class="col-auto pe-0">
-                                <img src="{{ asset('img/user.png') }}" alt="Phone icon" class="contact-image">
-                            </div>
-
-                            <div class="col">
-                                <h6 class="mb-0">{{ $contact->name }}</h6>
-                                <small>
-                                    <i class="fa-solid fa-envelope fa-sm"></i> {{ $contact->email }}
-                                    &nbsp;<br class="d-md-none">
-                                    <i class="fa-solid fa-phone fa-sm"></i> {{ $contact->contact }}
-                                </small>
-                            </div>
-
-                            {{-- Only allows removing contacts if logged in --}}
-                            @auth  
-                                <div class="col-auto">
-                                    <button type="button" value="{{ $contact->id }}" class="btn btn-light btn text-danger btn-delete-contact" title="Delete contact">
-                                        <i class="fa-solid fa-trash-can fa-lg"></i>
-                                    </button>
-                                </div>
-                            @endauth
-                        </div>
-                    </li>
+                    @include('components.contact', $contact)
                 @empty
                     <li class="list-group-item text-center">
                         There are no contacts registered.
@@ -104,7 +80,7 @@
             <form action="#" method="POST" id="newContactForm">
                 @csrf
                 
-                <div class="alert alert-danger" style="display: none" role="alert">
+                <div class="alert alert-danger text-break" style="display: none" role="alert">
                     <i class="fa-solid fa-circle-xmark fa-lg me-2" ></i> <span class="alert-message"></span>
                 </div>
 
@@ -114,20 +90,18 @@
 
                 <div class="mb-3">
                     <label for="contactName" class="form-label">Name</label>
-                    <input type="text" class="form-control" name="name" id="contactName">
+                    <input type="text" class="form-control" name="name" id="contactName" autocomplete="noautocomplete" maxlength="60">
                 </div>
 
                 <div class="mb-3">
                     <label for="contactEmail" class="form-label">Email address</label>
-                    <input type="email" class="form-control" name="email" id="contactEmail">
+                    <input type="email" class="form-control" name="email" id="contactEmail" autocomplete="noautocomplete" maxlength="200">
                 </div>
 
                 <div class="mb-3">
                     <label for="contactPhone" class="form-label">Contact</label>
-                    <input type="number" class="form-control" name="contact" id="contactPhone">
+                    <input type="text" class="form-control" name="contact" inputmode="numeric" maxlength="9" autocomplete="noautocomplete">
                 </div>
-
-            
             </form>
         </div>
         <div class="modal-footer">

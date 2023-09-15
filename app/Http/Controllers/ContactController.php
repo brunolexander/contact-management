@@ -13,10 +13,15 @@ class ContactController extends Controller
         protected ContactService $contact_service
     ) {}
 
-    public function index()
+    public function index(Request $request)
     {
         return $this->view->make('contacts', [
             'contacts' => $this->contact_service->contactList()
         ]);
+    }
+
+    public function create(Request $request)
+    {
+        return $this->contact_service->createContact($request->input());
     }
 }

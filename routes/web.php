@@ -19,3 +19,7 @@ Route::get('/', [ContactController::class, 'index']);
 Route::get('/login', [LoginController::class, 'login']);
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/logout', [LoginController::class, 'logout']);
+
+Route::middleware('auth')->group(function() {
+    Route::post('/contacts/create', [ContactController::class, 'create']);
+});

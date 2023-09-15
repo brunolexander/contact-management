@@ -14,7 +14,7 @@
 
 </head>
 <body>
-	
+
 	@yield('content')
 
 	<script src="{{ asset('libs/jquery.min.js') }}"></script>
