@@ -2,15 +2,15 @@
 
 Laravel web application developed to manage contacts.
 
+![image](preview/contact_list_logged_in.png)
+
 ## Application Features
 
-1. Index Page: Displays a list of existing contacts.
-2. Add Contact: Provides a form to add new contacts.
-3. Edit Contact: Allows editing an existing contact record.
-4. Delete Contact: Enables the deletion of an existing contact record.
-5. Login Page: Sign in to unlock contact management! Only logged-in users have the power to add, edit, and delete contacts.
-
-![image](preview/contact_list_logged_in.png)
+* Index Page: Displays a list of existing contacts.
+* Add Contact: Provides a form to add new contacts.
+* Edit Contact: Allows editing an existing contact record.
+* Delete Contact: Enables the deletion of an existing contact record.
+* Login Page: Sign in to unlock contact management! Only logged-in users have the power to add, edit, and delete contacts.
 
 ## Built with
 * Laravel 10
